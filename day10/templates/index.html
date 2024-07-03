@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="static/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <label for="fname">Fullname:</label><br>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label for="bdate">Birthdate:</label><br>
+        <input type="date" id="bdate" name="bdate"><br><br>
+        <button type="submit">Display</button><br><br>
+    </form>
+    <div id="output" style="display:none;"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#form').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    data: {
+                        fname: $('#fname').val(),
+                        bdate: $('#bdate').val(),
+                    },
+                    type: 'POST',
+                    url: '/add',
+                    success: function(data) {
+                        $('#output').text(`Hi, my name is ${data.name} and I'm ${data.age} years of old.`).show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

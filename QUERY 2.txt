@@ -1,0 +1,9 @@
+SELECT CONCAT (tbl_customer_info.fName,' ', tbl_customer_info.lName, ' ', tbl_customer_info.mName, ' ') AS FullName, tbl_movie_info.title AS Movie_Title, 
+	MONTHNAME(tbl_rents_info.requestedDate) AS Month, 
+YEAR(tbl_rents_info.requestedDate) AS Year,
+    (SELECT COUNT(*) FROM tbl_rents_info
+     WHERE tbl_rents_info.tbl_customer_info_id = tbl_customer_info.id 
+     AND tbl_rents_info.tbl_movie_info_id = tbl_movie_info.id) AS Quantity
+FROM tbl_customer_info, tbl_movie_info, tbl_rents_info
+WHERE tbl_rents_info.tbl_customer_info_id = tbl_customer_info.id 
+    AND tbl_rents_info.tbl_movie_info_id = tbl_movie_info.id

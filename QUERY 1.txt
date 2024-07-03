@@ -1,0 +1,3 @@
+SELECT CONCAT (tbl_customer_info.fName,' ',tbl_customer_info.lName,' ',tbl_customer_info.mName,' ') AS FullName, tbl_movie_info.title AS Movie_Title, (SELECT COUNT(*) FROM tbl_rents_info WHERE tbl_rents_info.tbl_customer_info_id = tbl_customer_info.id AND tbl_rents_info.tbl_movie_info_id = tbl_movie_info.id) AS Quantity
+FROM tbl_customer_info, tbl_movie_info
+WHERE EXISTS (SELECT 1 FROM tbl_rents_info WHERE tbl_rents_info.tbl_customer_info_id = tbl_customer_info.id AND tbl_rents_info.tbl_movie_info_id = tbl_movie_info.id)

@@ -1,0 +1,7 @@
+SELECT CONCAT (tbl_customer_info.fName,' ', tbl_customer_info.mName,' ', tbl_customer_info.lName) AS Fullname,
+	'N/A' AS Movie_Title,
+	'N/A' AS Month,
+	'N/A' AS Year,
+	'0' AS Quantity
+FROM tbl_customer_info
+WHERE NOT EXISTS (SELECT * FROM tbl_rents_info WHERE tbl_rents_info.tbl_customer_info_id = tbl_customer_info.id)
